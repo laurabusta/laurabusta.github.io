@@ -22,6 +22,8 @@ body {
 .category-header {
     width: 128px;
     height: 72px;
+    /* max-height: 128px; */
+    /* max-width: 72px; */
     background-color: #060CE9;
     color: white;
     font-weight: bold;
