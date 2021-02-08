@@ -1,0 +1,37 @@
+body {
+    background-color: ivory;
+}
+
+.game-board {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    width: 824px;
+    height: 488px;
+    justify-content: space-evenly;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-family: helvetica;
+    text-align: center;
+}
+
+.category-header {
+    width: 128px;
+    height: 72px;
+    background-color: #060CE9;
+    color: white;
+    font-weight: bold;
+}
+
+.category-answer {
+    width: 128px;
+    height: 72px;
+    background-color: #060CE9;
+    color: gold;
+    font-size: 30pt;
+}
+
