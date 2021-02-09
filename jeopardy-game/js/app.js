@@ -18,6 +18,8 @@ class Answer {
     }
 }
 
+
+
 ////////////////////////////////////////////////
 // data to load into array of answer objects
 ////////////////////////////////////////////////
@@ -100,26 +102,43 @@ const solutionKey = [
 // const testAnswerObject = new Answer(categoryArray[0], dollarValueArray[0], categoryAnswerArray[0][0], categoryChoicesArray[0][0], solutionKey[0][0]);
 // console.log(testAnswerObject);
 
-// category loop {
-//
-//      {answer loop
-//          create array of answer objects for category}
-//
-//      push array of answer objects into master array of categories
-//      gameAnswerArray [0][0] - 2d array, [categoryIndex], [dollarValueIndex]
-// }
 
-const masterAnswerArray = [];
-let tempAnswerObjectArray = [];
-for (let categoryIndex=0; categoryIndex<6; categoryIndex++) {
-    for (let answerIndex=0; answerIndex<5; answerIndex++) {
-        const tempAnswerObject = new Answer(categoryArray[categoryIndex], dollarValueArray[answerIndex], categoryAnswerArray[categoryIndex][answerIndex], categoryChoicesArray[categoryIndex][answerIndex], solutionKey[categoryIndex][answerIndex]);
-        tempAnswerObjectArray.push(tempAnswerObject);
-    };
-    masterAnswerArray.push(tempAnswerObjectArray);
-    tempAnswerObjectArray = [];  // clear the temporary array of Answers that are pushed on the master Array for next loop iteration
-};
-console.log(masterAnswerArray);
+////////////////////////////////////////////////
+// Top-Level Objects
+////////////////////////////////////////////////
+
+const UI = {
+
+}
+
+const EventHandlers = {
+
+}
+
+const Game = {
+
+    loadAnswersData: (catArray, dValArray, answersArray, choicesArray, solArray) => {
+        const masterAnswersArray = [];
+        let tempCategoryAnswersArray = [];
+        for (let categoryIndex=0; categoryIndex<6; categoryIndex++) {
+            for (let answerIndex=0; answerIndex<5; answerIndex++) {
+                const tempAnswerObject = new Answer(catArray[categoryIndex], dValArray[answerIndex], answersArray[categoryIndex][answerIndex], choicesArray[categoryIndex][answerIndex], solArray[categoryIndex][answerIndex]);
+                tempCategoryAnswersArray.push(tempAnswerObject);
+            };
+            masterAnswersArray.push(tempCategoryAnswersArray);
+            tempCategoryAnswersArray = [];  // clear the temporary array of Answers that are pushed on the master Array for next loop iteration
+            
+        };
+        console.log(masterAnswersArray);
+        return masterAnswersArray;
+    }
+
+}
+
+
+
+const singleJeopardyArray = Game.loadAnswersData(categoryArray, dollarValueArray, categoryAnswerArray, categoryChoicesArray, solutionKey);
+console.log(singleJeopardyArray);
 
 ///////////////////////////////
 // event handling
