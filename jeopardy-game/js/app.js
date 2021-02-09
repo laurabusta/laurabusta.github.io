@@ -121,31 +121,51 @@ const UI = {
 }
 
 const EventHandlers = {
-    // click on answer onClickShowAnswer
+    // click on answer onClickDollarValue
     //      match element with answer object
-    //      UI.openModal -> return userChhoice
+    //      UI.openModal (pass Answer object) -> return userChoice
     //      update Player score based on userChoice
     //      change element to remove dollar amount
     //      check if gameOver
+
+    onClickDollarValue: (e) => {
+        console.log('box click triggers Event Handler method');
+        console.log($(e.currentTarget).attr('id'));
+        // identify which answer is chosen, call function that returns answer object
+        let idNumber = parseInt($(e.currentTarget).attr('id')); // change id to a number
+        let categoryIndex = Math.floor(idNumber / 10);
+        let dValueIndex = idNumber % 10;
+        // console.log(categoryIndex, dValueIndex);
+        // find answer that matches id console log
+        console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
+
+
+
+    } // end onClickDollarValue method
 
     
 }
 
 const Game = {
 
+    //  loadAnswersData: receives data arrays to return a 2-d array of Answer objects
+    //          designed for future expansion to load a second double jeopardy round
     loadAnswersData: (catArray, dValArray, answersArray, choicesArray, solArray) => {
-        const masterAnswersArray = [];
-        let tempCategoryAnswersArray = [];
+
+        const masterAnswersArray = []; // declare return variable of 2-d array of Answer objects
+        let tempCategoryAnswersArray = []; // temp array for inner for-loop that is pushed on master array
         for (let categoryIndex=0; categoryIndex<6; categoryIndex++) {
             for (let answerIndex=0; answerIndex<5; answerIndex++) {
+                // create Answer object with properties from data arrays
                 const tempAnswerObject = new Answer(catArray[categoryIndex], dValArray[answerIndex], answersArray[categoryIndex][answerIndex], choicesArray[categoryIndex][answerIndex], solArray[categoryIndex][answerIndex]);
-                tempCategoryAnswersArray.push(tempAnswerObject);
-            };
-            masterAnswersArray.push(tempCategoryAnswersArray);
-            tempCategoryAnswersArray = [];  // clear the temporary array of Answers that are pushed on the master Array for next loop iteration
-        };
-        console.log(masterAnswersArray);
-        return masterAnswersArray;
+                tempCategoryAnswersArray.push(tempAnswerObject); // push Answer object to array for each category
+            }; // end inner for-loop
+            masterAnswersArray.push(tempCategoryAnswersArray); // push category answer array from inner loop to master 2-d array of Answer objects
+            tempCategoryAnswersArray = [];  // clear the temp category array from inner for-loop at end of each outer loop iteration
+        }; // end outer for-loop
+
+        return masterAnswersArray; //return 2-d array of Answer objects that can be addressed by category index and dollar value index
+
     } // end loadAnswersData method
 
 } // end Game object
@@ -157,19 +177,21 @@ console.log(singleJeopardyArray);
 
 $( () => {
 
+    $('.category-answer-box').on('click', EventHandlers.onClickDollarValue);
+
+ /* moved all this code to EventHandlers object, will remove this block
     $('.category-answer-box').on('click', (event) => {
-        console.log('box clicked');
-        console.log($(event.currentTarget).attr('id'));
+        // console.log('box clicked');
+        // console.log($(event.currentTarget).attr('id'));
         // identify which answer is chosen, call function that returns answer object
-        console.log(Number.isNaN($(event.currentTarget).attr('id'))); //checking if id is a number
-        let temp = parseInt($(event.currentTarget).attr('id'));
-        // console.log(Number.isNaN(temp));
-        let categoryIndex = Math.floor(temp / 10);
-        let dValueIndex = temp % 10;
-        console.log(categoryIndex, dValueIndex);
+        let idNumber = parseInt($(event.currentTarget).attr('id')); // change id to a number
+        let categoryIndex = Math.floor(idNumber / 10);
+        let dValueIndex = idNumber % 10;
+        // console.log(categoryIndex, dValueIndex);
         // find answer that matches id console log
         console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
 
     })
+*/
 
 });
