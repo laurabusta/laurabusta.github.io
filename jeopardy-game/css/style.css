@@ -9,6 +9,7 @@ body {
     background-color: black;
     width: 824px;
     height: 488px;
+    /* height: 568px; */
     justify-content: space-evenly;
     margin: auto;
 }
@@ -36,15 +37,23 @@ body {
     padding: 20px 10px 20px 10px;
 }
 
-.category-answer {
+.category-answer-box {
     width: 128px;
     height: 72px;
     background-color: #060CE9;
+}
+
+.category-answer {
+    /* width: 128px; */
+    /* height: 72px; */
+    /* background-color: #060CE9; */
     color: #FFCC00;
     font-size: 30pt;
     font-family: 'Oswald', sans-serif;
     font-weight: bold;
     text-shadow: 4px 4px 2px black;
+    /* margin: 0 auto; */
+    padding: 3px 10px 0px 7px;
 }
 
 .category-answer:first-letter {

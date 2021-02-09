@@ -112,7 +112,7 @@ const solutionKey = [
 ////////////////////////////////////////////////
 
 const UI = {
-    // load game board tile values
+    // load game board tile values (headers only for single jeopardy only)
     //
     // launch modal
     //
