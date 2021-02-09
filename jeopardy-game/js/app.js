@@ -157,7 +157,7 @@ console.log(singleJeopardyArray);
 
 $( () => {
 
-    $('.category-answer').on('click', (event) => {
+    $('.category-answer-box').on('click', (event) => {
         console.log('box clicked');
         console.log($(event.currentTarget).attr('id'));
         // identify which answer is chosen, call function that returns answer object
