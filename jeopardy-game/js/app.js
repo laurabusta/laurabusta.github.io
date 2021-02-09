@@ -9,16 +9,20 @@ console.log("hello world");
 // create an array of answer objects
 
 class Answer {
-    constructor (category, dollar_value, answer, choicesArray, solution) {
+    constructor (category, dollar_value, answer, choicesArray, solution, answered) {
         this.category = category;
         this.dollar_value = dollar_value;
         this.answer = answer;
         this.choicesArray = choicesArray;
         this.solution = solution;
+        this.answered = answered;
     }
 }
 
-
+class Player {
+    // track player score
+    
+}
 
 ////////////////////////////////////////////////
 // data to load into array of answer objects
@@ -108,11 +112,23 @@ const solutionKey = [
 ////////////////////////////////////////////////
 
 const UI = {
+    // load game board tile values
+    //
+    // launch modal
+    //
+    // game over window
 
 }
 
 const EventHandlers = {
+    // click on answer onClickShowAnswer
+    //      match element with answer object
+    //      UI.openModal -> return userChhoice
+    //      update Player score based on userChoice
+    //      change element to remove dollar amount
+    //      check if gameOver
 
+    
 }
 
 const Game = {
@@ -127,22 +143,17 @@ const Game = {
             };
             masterAnswersArray.push(tempCategoryAnswersArray);
             tempCategoryAnswersArray = [];  // clear the temporary array of Answers that are pushed on the master Array for next loop iteration
-            
         };
         console.log(masterAnswersArray);
         return masterAnswersArray;
-    }
+    } // end loadAnswersData method
 
-}
-
+} // end Game object
 
 
 const singleJeopardyArray = Game.loadAnswersData(categoryArray, dollarValueArray, categoryAnswerArray, categoryChoicesArray, solutionKey);
 console.log(singleJeopardyArray);
 
-///////////////////////////////
-// event handling
-///////////////////////////////
 
 $( () => {
 
@@ -151,6 +162,14 @@ $( () => {
         console.log($(event.currentTarget).attr('id'));
         // identify which answer is chosen, call function that returns answer object
         console.log(Number.isNaN($(event.currentTarget).attr('id'))); //checking if id is a number
+        let temp = parseInt($(event.currentTarget).attr('id'));
+        // console.log(Number.isNaN(temp));
+        let categoryIndex = Math.floor(temp / 10);
+        let dValueIndex = temp % 10;
+        console.log(categoryIndex, dValueIndex);
+        // find answer that matches id console log
+        console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
+
     })
 
 });
