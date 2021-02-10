@@ -69,28 +69,18 @@ h3 {
     /* vertical-align: baseline; */
 }
 
-/* .modal-box {
-    background-color: rgba(0,0,0,0.4);
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	z-index: 1;
-	overflow: auto;
-} */
-
 .modal-box {
     background-color: lightgray;
 	position: absolute;
 	top: 10%;
-	height: 500px;
-	width: 600px;
+	height: auto; /* 500px for pre-styled answer choices */
+	width: auto; /* 600px for pre-styled answer choices */
 	z-index: 1;
 	overflow: auto;
     border-radius: 10px;
     box-shadow: 0px 0px 15px black;
     text-align: center;
+    padding: 0px 0px 10px 0px;
 }
 
 .modal-box h2 {
@@ -105,7 +95,7 @@ h3 {
     height: 216px;
     background-color: #060CE9;
     border: 5px solid black;
-    margin: 0 auto;
+    margin: 0px 30px;
 }
 
 .modal-answer-text {
@@ -119,7 +109,38 @@ h3 {
 }
 
 .modal-choices {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 280px;
     padding-top: 2px;
+    align-items: center;
+}
+
+.modal-choices-text-box {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    width: 384px;
+    height: 45px;
+    background-color: darkgray;
+    border: 4px solid black;
+    margin: 0px 30px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px black;
+}
+
+.modal-choices-text {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 1px black;
+}
+
+.modal-submit {
+
 }
 
 .modal-box form {

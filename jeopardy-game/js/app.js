@@ -1,12 +1,5 @@
 console.log("hello world");
 
-// load data
-// connect html element to data object
-// game logic
-
-// create game class with overall game logic and functions
-
-// create an array of answer objects
 
 class Answer {
     constructor (category, dollar_value, answer, choicesArray, solution, answered = false) {
@@ -91,22 +84,6 @@ const solutionKey = [
     [0,1,2,3,0]
 ];
 
-// tested the data arrays
-// console.log(categoryArray[0]);
-// console.log(dollarValueArray[1]);
-// console.log(categoryAnswerArray[2][3]);
-// console.log(categoryChoicesArray[5][3]);
-// console.log(solutionKey[1][3]);
-
-////////////////////////////////////////////////////
-// load data into array of objects of class answer
-////////////////////////////////////////////////////
-
-// test creating one Answer object
-// const testAnswerObject = new Answer(categoryArray[0], dollarValueArray[0], categoryAnswerArray[0][0], categoryChoicesArray[0][0], solutionKey[0][0]);
-// console.log(testAnswerObject);
-
-
 ////////////////////////////////////////////////
 // Top-Level Objects
 ////////////////////////////////////////////////
@@ -132,29 +109,42 @@ const UI = {
         //////////////
         let num = 1;
         for (let playerChoice of answerObject.choicesArray) {
-            $divChoices.append($('<p>').text(num + ". " + playerChoice));
+            aNumChar = num.toString();
+            let idChoice = 'ch' + aNumChar;
+            const $divChoicesTextBox = $('<div>').addClass('modal-choices-text-box').attr('id', idChoice);
+            $divChoicesTextBox.append($('<div>').addClass('modal-choices-text').text(playerChoice));
+            $divChoices.append($divChoicesTextBox);
             num++;
         };
         $divElement.append($divChoices);
-        //////////////
-        const $radioForm = $('<form>')
-        for (let i=0; i<4; i++) {
-            numString = i.toString();
-            let aNum = i + 1;
-            let radioLabelString = aNum.toString();
-            $radioForm.append('<input type="radio" name="choice" value="' + numString + '">' + radioLabelString);
-        };
-        $radioForm.append('<input type="submit" value="submit" id="submit">');
-        // $radioForm.append('<button type="button">Click Me!</button>');
-        $divElement.append($radioForm);
-        $('form').on('submit', (submitEvent) => {
-            submitEvent.preventDefault();
-            console.log('submit button clicked');
-            console.log($('form'));
-            // check if a radio button was selected
-            //      if a choice was made, remove modal and return player choice
+
+        let playerPick = null;
+        $('.modal-choices-text-box').on('click', (choiceEvent) => {
+            console.log('text box clicked');
+            playerPick = $(choiceEvent.currentTarget).attr('id');
+            console.log(playerPick);
             $divElement.remove();
         });
+
+        //////////////
+        // const $radioForm = $('<form>')
+        // for (let i=0; i<4; i++) {
+        //     numString = i.toString();
+        //     let aNum = i + 1;
+        //     let radioLabelString = aNum.toString();
+        //     $radioForm.append('<input type="radio" name="choice" value="' + numString + '">' + radioLabelString);
+        // };
+        // $radioForm.append('<input type="submit" value="submit" id="submit">');
+        // // $radioForm.append('<button type="button">Click Me!</button>');
+        // $divElement.append($radioForm);
+        // $('form').on('submit', (submitEvent) => {
+        //     submitEvent.preventDefault();
+        //     console.log('submit button clicked');
+        //     console.log($('form'));
+        //     // check if a radio button was selected
+        //     //      if a choice was made, remove modal and return player choice
+        //     $divElement.remove();
+        // });
         answerObject.answered = true;
     } // end openModal method
 
@@ -217,24 +207,9 @@ const Game = {
 const singleJeopardyArray = Game.loadAnswersData(categoryArray, dollarValueArray, categoryAnswerArray, categoryChoicesArray, solutionKey);
 console.log(singleJeopardyArray);
 
-
 $( () => {
 
     $('.category-answer-box').on('click', EventHandlers.onClickDollarValue);
 
- /* moved all this code to EventHandlers object, will remove this block
-    $('.category-answer-box').on('click', (event) => {
-        // console.log('box clicked');
-        // console.log($(event.currentTarget).attr('id'));
-        // identify which answer is chosen, call function that returns answer object
-        let idNumber = parseInt($(event.currentTarget).attr('id')); // change id to a number
-        let categoryIndex = Math.floor(idNumber / 10);
-        let dValueIndex = idNumber % 10;
-        // console.log(categoryIndex, dValueIndex);
-        // find answer that matches id console log
-        console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
-
-    })
-*/
 
 });
