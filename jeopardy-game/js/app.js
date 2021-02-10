@@ -9,7 +9,7 @@ console.log("hello world");
 // create an array of answer objects
 
 class Answer {
-    constructor (category, dollar_value, answer, choicesArray, solution, answered) {
+    constructor (category, dollar_value, answer, choicesArray, solution, answered = false) {
         this.category = category;
         this.dollar_value = dollar_value;
         this.answer = answer;
@@ -151,8 +151,11 @@ const UI = {
             submitEvent.preventDefault();
             console.log('submit button clicked');
             console.log($('form'));
+            // check if a radio button was selected
+            //      if a choice was made, remove modal and return player choice
             $divElement.remove();
         });
+        answerObject.answered = true;
     } // end openModal method
 
 
@@ -176,10 +179,11 @@ const EventHandlers = {
         // console.log(categoryIndex, dValueIndex);
         // find answer that matches id console log
         console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
-        UI.openModal(singleJeopardyArray[categoryIndex][dValueIndex]);
-
-
-
+        if (!singleJeopardyArray[categoryIndex][dValueIndex].answered) {
+            UI.openModal(singleJeopardyArray[categoryIndex][dValueIndex]);
+            $(e.currentTarget).text('');
+        };
+        
     } // end onClickDollarValue method
 
     
