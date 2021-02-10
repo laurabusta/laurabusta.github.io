@@ -4,7 +4,7 @@ console.log("hello world");
 class Answer {
     constructor (category, dollar_value, answer, choicesArray, solution, answered = false) {
         this.category = category;
-        this.dollar_value = dollar_value;
+        this.dollar_value = dollar_value; // integer used in score calculation
         this.answer = answer;
         this.choicesArray = choicesArray;
         this.solution = solution;
@@ -14,6 +14,10 @@ class Answer {
 
 class Player {
     // track player score
+    constructor (name, score=0) {
+        this.name = name;
+        this.score = score;
+    }
     
 }
 
@@ -22,7 +26,7 @@ class Player {
 ////////////////////////////////////////////////
 
 const categoryArray = ['CATEGORY ONE', 'CATEGORY TWO', 'CATEGORY THREE', 'CATEGORY FOUR', 'CATEGORY FIVE', 'CATEGORY SIX'];
-const dollarValueArray = ['$100', '$200', '$300', '$400', '$500'];
+const dollarValueArray = [100, 200, 300, 400, 500];
 const categoryAnswerArray = [
     ['cat1:answer $100', 'cat1:answer $200', 'cat1:answer $300', 'cat1:answer $400', 'cat1:answer $500'],
     ['cat2:answer $100', 'cat2:answer $200', 'cat2:answer $300', 'cat2:answer $400', 'cat2:answer $500'],
@@ -84,12 +88,6 @@ const solutionKey = [
     ['A', 'B', 'C', 'D', 'A']
 ];
 
-////////////////////////////////////////////////
-// Global Variable Declaration
-////////////////////////////////////////////////
-
-
-
 
 ////////////////////////////////////////////////
 // Top-Level Objects
@@ -125,34 +123,23 @@ const UI = {
             num++;
         };
         $divElement.append($divChoices);
-
+        ////////////////
+        // this will likely get moved to event handlers
         let playerPick = null;
         $('.modal-choices-text-box').on('click', (choiceEvent) => {
             console.log('text box clicked');
             playerPick = $(choiceEvent.currentTarget).attr('id');
             console.log(playerPick);
             $divElement.remove();
+            if (playerPick === answerObject.solution) {
+                playerOne.score = playerOne.score + answerObject.dollar_value;
+            } else {
+                playerOne.score = playerOne.score - answerObject.dollar_value;
+            };
+            console.log('player score ' + playerOne.score);
         });
-
-        //////////////
-        // const $radioForm = $('<form>')
-        // for (let i=0; i<4; i++) {
-        //     numString = i.toString();
-        //     let aNum = i + 1;
-        //     let radioLabelString = aNum.toString();
-        //     $radioForm.append('<input type="radio" name="choice" value="' + numString + '">' + radioLabelString);
-        // };
-        // $radioForm.append('<input type="submit" value="submit" id="submit">');
-        // // $radioForm.append('<button type="button">Click Me!</button>');
-        // $divElement.append($radioForm);
-        // $('form').on('submit', (submitEvent) => {
-        //     submitEvent.preventDefault();
-        //     console.log('submit button clicked');
-        //     console.log($('form'));
-        //     // check if a radio button was selected
-        //     //      if a choice was made, remove modal and return player choice
-        //     $divElement.remove();
-        // });
+        ///////////////
+        
         answerObject.answered = true;
     } // end openModal method
 
@@ -214,6 +201,7 @@ const Game = {
 
 const singleJeopardyArray = Game.loadAnswersData(categoryArray, dollarValueArray, categoryAnswerArray, categoryChoicesArray, solutionKey);
 console.log(singleJeopardyArray);
+const playerOne = new Player();
 
 $( () => {
 

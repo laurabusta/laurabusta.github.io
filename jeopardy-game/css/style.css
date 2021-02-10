@@ -11,6 +11,40 @@ h3 {
     text-align: center;
 }
 
+#player-info {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    width: 700px;
+    height: auto;
+    justify-content: space-evenly;
+    margin: 10px auto;
+    border-radius: 10px;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.player-info-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    width: 300px;
+    height: auto;
+    background-color: #060CE9;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px 1px black;
+    font-family: helvetica;
+}
+
+.player-info-label {
+    margin-right: 10px;
+}
+
 #game-board {
     display: flex;
     flex-direction: row;
@@ -70,7 +104,7 @@ h3 {
 }
 
 .modal-box {
-    background-color: lightgray;
+    background-color: whitesmoke;
 	position: absolute;
 	top: 10%;
 	height: auto; /* 500px for pre-styled answer choices */
