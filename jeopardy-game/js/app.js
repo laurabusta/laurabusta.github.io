@@ -118,21 +118,42 @@ const UI = {
     //
     // game over window
 
-    openModal: () => {
+    openModal: (answerObject) => {
         console.log('box click triggers openModal method');
-        const $divElement = $('div');
-        console.log($divElement);
-        // const $divModal = $('div').addClass('modal-box');
-        // const $divModalContent = $('div').addClass('modal-box-content');
-        // const $closeButton = $('button');
-        // $divModalContent.append($closeButton);
-        // $divModal.append($divModalContent);
-        // $('body').append($divModal);
- /*       $closeButton.on('click', () => {
-            $divModal.remove();
-        }); */
-
-    }
+        $divElement = $('<div>').addClass('modal-box')
+        $('#game-board').append($divElement);
+        h2String = 'For ' + answerObject.dollar_value + ' in ' + answerObject.category + '...';
+        $divElement.append($('<h2>').text(h2String));
+        //////////////
+        const $divAnswerBox = $('<div>').addClass('modal-answer');
+        $divElement.append($divAnswerBox);
+        $divAnswerBox.append($('<div>').addClass('modal-answer-text').text(answerObject.answer));
+        const $divChoices = $('<div>').addClass('modal-choices');
+        //////////////
+        let num = 1;
+        for (let playerChoice of answerObject.choicesArray) {
+            $divChoices.append($('<p>').text(num + ". " + playerChoice));
+            num++;
+        };
+        $divElement.append($divChoices);
+        //////////////
+        const $radioForm = $('<form>')
+        for (let i=0; i<4; i++) {
+            numString = i.toString();
+            let aNum = i + 1;
+            let radioLabelString = aNum.toString();
+            $radioForm.append('<input type="radio" name="choice" value="' + numString + '">' + radioLabelString);
+        };
+        $radioForm.append('<input type="submit" value="submit" id="submit">');
+        // $radioForm.append('<button type="button">Click Me!</button>');
+        $divElement.append($radioForm);
+        $('form').on('submit', (submitEvent) => {
+            submitEvent.preventDefault();
+            console.log('submit button clicked');
+            console.log($('form'));
+            $divElement.remove();
+        });
+    } // end openModal method
 
 
 }
@@ -155,7 +176,7 @@ const EventHandlers = {
         // console.log(categoryIndex, dValueIndex);
         // find answer that matches id console log
         console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
-        // UI.openModal();
+        UI.openModal(singleJeopardyArray[categoryIndex][dValueIndex]);
 
 
 

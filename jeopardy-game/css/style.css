@@ -11,7 +11,7 @@ h3 {
     text-align: center;
 }
 
-.game-board {
+#game-board {
     display: flex;
     flex-direction: row;
     background-color: black;
@@ -100,6 +100,7 @@ h3 {
 .modal-answer {
     display: flex;
     align-items: center;
+    justify-content:center;
     width: 384px;
     height: 216px;
     background-color: #060CE9;
