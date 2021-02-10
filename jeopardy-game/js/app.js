@@ -118,6 +118,23 @@ const UI = {
     //
     // game over window
 
+    openModal: () => {
+        console.log('box click triggers openModal method');
+        const $divElement = $('div');
+        console.log($divElement);
+        // const $divModal = $('div').addClass('modal-box');
+        // const $divModalContent = $('div').addClass('modal-box-content');
+        // const $closeButton = $('button');
+        // $divModalContent.append($closeButton);
+        // $divModal.append($divModalContent);
+        // $('body').append($divModal);
+ /*       $closeButton.on('click', () => {
+            $divModal.remove();
+        }); */
+
+    }
+
+
 }
 
 const EventHandlers = {
@@ -138,6 +155,7 @@ const EventHandlers = {
         // console.log(categoryIndex, dValueIndex);
         // find answer that matches id console log
         console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
+        // UI.openModal();
 
 
 

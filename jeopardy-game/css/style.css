@@ -3,6 +3,14 @@ body {
     /* margin: auto; */
 }
 
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
 .game-board {
     display: flex;
     flex-direction: row;
@@ -59,5 +67,66 @@ body {
 .category-answer:first-letter {
     font-size:90%;
     /* vertical-align: baseline; */
+}
+
+/* .modal-box {
+    background-color: rgba(0,0,0,0.4);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	overflow: auto;
+} */
+
+.modal-box {
+    background-color: lightgray;
+	position: absolute;
+	top: 10%;
+	height: 500px;
+	width: 600px;
+	z-index: 1;
+	overflow: auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px black;
+    text-align: center;
+}
+
+.modal-box h2 {
+    text-align: center;
+}
+
+.modal-answer {
+    display: flex;
+    align-items: center;
+    width: 384px;
+    height: 216px;
+    background-color: #060CE9;
+    border: 5px solid black;
+    margin: 0 auto;
+}
+
+.modal-answer-text {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 1px black;
+
+}
+
+.modal-choices {
+    padding-top: 2px;
+}
+
+.modal-box form {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center; */
+    text-align: center;
+    display: block;
 }
 
