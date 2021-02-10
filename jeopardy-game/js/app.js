@@ -76,13 +76,20 @@ const categoryChoicesArray = [
     ]
 ];
 const solutionKey = [
-    [0,1,2,3,0],
-    [0,1,2,3,0],
-    [0,1,2,3,0],
-    [0,1,2,3,0],
-    [0,1,2,3,0],
-    [0,1,2,3,0]
+    ['A', 'B', 'C', 'D', 'A'],
+    ['A', 'B', 'C', 'D', 'A'],
+    ['A', 'B', 'C', 'D', 'A'],
+    ['A', 'B', 'C', 'D', 'A'],
+    ['A', 'B', 'C', 'D', 'A'],
+    ['A', 'B', 'C', 'D', 'A']
 ];
+
+////////////////////////////////////////////////
+// Global Variable Declaration
+////////////////////////////////////////////////
+
+
+
 
 ////////////////////////////////////////////////
 // Top-Level Objects
@@ -107,12 +114,13 @@ const UI = {
         $divAnswerBox.append($('<div>').addClass('modal-answer-text').text(answerObject.answer));
         const $divChoices = $('<div>').addClass('modal-choices');
         //////////////
-        let num = 1;
-        for (let playerChoice of answerObject.choicesArray) {
-            aNumChar = num.toString();
-            let idChoice = 'ch' + aNumChar;
-            const $divChoicesTextBox = $('<div>').addClass('modal-choices-text-box').attr('id', idChoice);
-            $divChoicesTextBox.append($('<div>').addClass('modal-choices-text').text(playerChoice));
+        let num = 0;
+        const choiceId = ['A', 'B', 'C', 'D'];
+        for (let answerChoice of answerObject.choicesArray) {
+            // aNumChar = num.toString();
+            // let idChoice = 'ch' + aNumChar;
+            const $divChoicesTextBox = $('<div>').addClass('modal-choices-text-box').attr('id', choiceId[num]);
+            $divChoicesTextBox.append($('<div>').addClass('modal-choices-text').text(answerChoice));
             $divChoices.append($divChoicesTextBox);
             num++;
         };
@@ -171,7 +179,7 @@ const EventHandlers = {
         console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
         if (!singleJeopardyArray[categoryIndex][dValueIndex].answered) {
             UI.openModal(singleJeopardyArray[categoryIndex][dValueIndex]);
-            $(e.currentTarget).text('');
+            $(e.currentTarget).text(''); // remove dollar value from game board
         };
         
     } // end onClickDollarValue method
