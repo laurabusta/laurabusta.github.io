@@ -89,10 +89,7 @@ h3 {
     background-color: #060CE9;
 }
 
-.category-answer {
-    /* width: 128px; */
-    /* height: 72px; */
-    /* background-color: #060CE9; */
+.category-answer { /* dollar value text styling */
     color: #FFCC00;
     font-size: 30pt;
     font-family: 'Oswald', sans-serif;
@@ -129,6 +126,7 @@ h3 {
 .modal-box h2 {
     text-align: center;
     margin: 15px 30px;
+    text-shadow: 1px 1px 1px lightgray;
 }
 
 .modal-answer {

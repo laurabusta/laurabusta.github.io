@@ -14,10 +14,11 @@ class Answer {
 
 class Player {
     // track player score
-    constructor (name, score=0, gameOver) {
+    constructor (name, score=0, gameOver=false, won=true) {
         this.name = name;
         this.score = score;
         this.gameOver = gameOver;
+        this.won = won;
     }
     
 }
@@ -156,7 +157,12 @@ const UI = {
         //////////////
         const $divAnswerBox = $('<div>').addClass('modal-answer');
         $divModalBox.append($divAnswerBox);
-        $divAnswerBox.append($('<div>').addClass('modal-answer-text').text('GAME OVER\nREFRESH BROWSER TO PLAY AGAIN'));
+        if (playerOne.won) {
+            $divAnswerBox.append($('<div>').addClass('modal-answer-text').text('YOU WON!'));
+        } else {
+            $divAnswerBox.append($('<div>').addClass('modal-answer-text').text('YOU LOST!'));
+        };
+        $divAnswerBox.append($('<div>').addClass('modal-answer-text').text('SCORE: ' + playerOne.score));
         $divModalBox.append($('<h2>').text('REFRESH BROWSER TO PLAY AGAIN!'));
 
     } // end openGameOverModal method
@@ -236,6 +242,7 @@ const Game = {
         if (playerOne.score + unansweredDvSum < 0) {
             console.log('not enough points left on board for player to win');
             gameOver = true;
+            playerOne.won = false;
         }
         if (gameOver) {
             // open gameOver modal
