@@ -139,6 +139,7 @@ const UI = {
             console.log('player score ' + playerOne.score);
             $('#player-score').text(playerOne.score); // create a UI method to update score with $ formatting
             console.log('check if game over');
+            Game.overCheck();
         });
         ///////////////
         answerObject.answered = true;
@@ -173,6 +174,7 @@ const EventHandlers = {
         
     } // end onClickDollarValue method
 
+
     
 }
 
@@ -196,7 +198,24 @@ const Game = {
 
         return masterAnswersArray; //return 2-d array of Answer objects that can be addressed by category index and dollar value index
 
-    } // end loadAnswersData method
+    }, // end loadAnswersData method
+
+    overCheck: () => {
+        // if all questions have been answered, game is over and show game over modal
+        let gameOver = true;
+        // check all answers to see if any are not answered
+        for (let catIndex=0; catIndex<6; catIndex++) {
+            for (let dvIndex=0; dvIndex<5; dvIndex++) {
+                if (singleJeopardyArray[catIndex][dvIndex].answered === false) {
+                    gameOver = false;
+                };
+            }; // end inner for-loop
+        }; // end outer for-loop
+        if (gameOver) {
+            // open gameOver modal
+            console.log('game over');
+        };
+    }
 
 } // end Game object
 
