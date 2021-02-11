@@ -152,10 +152,12 @@ const UI = {
         console.log('openGameOverModal');
         $divModalBox = $('<div>').addClass('modal-box');
         $('#game-board').append($divModalBox);
+        $divModalBox.append($('<h2>').text('GAME OVER!'));
         //////////////
         const $divAnswerBox = $('<div>').addClass('modal-answer');
         $divModalBox.append($divAnswerBox);
-        $divAnswerBox.append($('<div>').addClass('modal-answer-text').text('GAME OVER'));
+        $divAnswerBox.append($('<div>').addClass('modal-answer-text').text('GAME OVER\nREFRESH BROWSER TO PLAY AGAIN'));
+        $divModalBox.append($('<h2>').text('REFRESH BROWSER TO PLAY AGAIN!'));
 
     } // end openGameOverModal method
 
