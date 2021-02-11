@@ -126,6 +126,7 @@ const UI = {
         ////////////////
         // this will likely get moved to event handlers
         let playerPick = null;
+        // $('.modal-choices-text-box').on('click', EventHandlers.onClickPlayerChoice(answerObject));
         $('.modal-choices-text-box').on('click', (choiceEvent) => {
             console.log('text box clicked');
             playerPick = $(choiceEvent.currentTarget).attr('id');
@@ -172,8 +173,23 @@ const EventHandlers = {
             $(e.currentTarget).text(''); // remove dollar value from game board
         };
         
-    } // end onClickDollarValue method
+    }, // end onClickDollarValue method
 
+    // onClickPlayerChoice: (e) => {
+    //     console.log('text box clicked');
+    //     playerPick = $(e.currentTarget).attr('id');
+    //     console.log(playerPick);
+    //     $divElement.remove();
+    //     if (playerPick === answerObject.solution) {
+    //         playerOne.score = playerOne.score + answerObject.dollar_value;
+    //     } else {
+    //         playerOne.score = playerOne.score - answerObject.dollar_value;
+    //     };
+    //     console.log('player score ' + playerOne.score);
+    //     $('#player-score').text(playerOne.score); // create a UI method to update score with $ formatting
+    //     console.log('check if game over');
+    //     Game.overCheck();
+    // }
 
     
 }
@@ -203,19 +219,29 @@ const Game = {
     overCheck: () => {
         // if all questions have been answered, game is over and show game over modal
         let gameOver = true;
-        // check all answers to see if any are not answered
+        let unansweredDvSum = 0;
+        // check all answers to see if any are not answered and sum of points left on board
         for (let catIndex=0; catIndex<6; catIndex++) {
             for (let dvIndex=0; dvIndex<5; dvIndex++) {
                 if (singleJeopardyArray[catIndex][dvIndex].answered === false) {
                     gameOver = false;
+                    unansweredDvSum = unansweredDvSum + singleJeopardyArray[catIndex][dvIndex].dollar_value;
                 };
             }; // end inner for-loop
         }; // end outer for-loop
+        console.log('Player score: ' + playerOne.score);
+        console.log('Number of points left on game board: ' + unansweredDvSum);
+        // if player cannot get enough points to win game, then game over
+        if (playerOne.score + unansweredDvSum < 0) {
+            console.log('not enough points left on board for player to win');
+            gameOver = true;
+        }
         if (gameOver) {
             // open gameOver modal
             console.log('game over');
         };
-    }
+        
+    } // end overCheck method
 
 } // end Game object
 
@@ -224,12 +250,8 @@ const singleJeopardyArray = Game.loadAnswersData(categoryArray, dollarValueArray
 console.log(singleJeopardyArray);
 const playerOne = new Player();
 
-
 $( () => {
 
     $('.category-answer-box').on('click', EventHandlers.onClickDollarValue);
     
-    
-
-
 });
