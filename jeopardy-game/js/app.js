@@ -101,9 +101,9 @@ const UI = {
     //
     // game over window
 
-    openModal: (answerObject) => {
-        console.log('box click triggers openModal method');
-        $divElement = $('<div>').addClass('modal-box')
+    openAnswerModal: (answerObject) => {
+        console.log('box click triggers openAnswerModal method');
+        $divElement = $('<div>').addClass('modal-box');
         $('#game-board').append($divElement);
         h2String = 'For ' + answerObject.dollar_value + ' in ' + answerObject.category + '...';
         $divElement.append($('<h2>').text(h2String));
@@ -146,15 +146,25 @@ const UI = {
         ///////////////
         answerObject.answered = true;
         
-    } // end openModal method
+    }, // end openAnswerModal method
 
+    openGameOverModal: () => {
+        console.log('openGameOverModal');
+        $divModalBox = $('<div>').addClass('modal-box');
+        $('#game-board').append($divModalBox);
+        //////////////
+        const $divAnswerBox = $('<div>').addClass('modal-answer');
+        $divModalBox.append($divAnswerBox);
+        $divAnswerBox.append($('<div>').addClass('modal-answer-text').text('GAME OVER'));
 
-}
+    } // end openGameOverModal method
+
+} // end UI object
 
 const EventHandlers = {
     // click on answer onClickDollarValue
     //      match element with answer object
-    //      UI.openModal (pass Answer object) -> return userChoice
+    //      UI.openAnswerModal (pass Answer object) -> return userChoice
     //      update Player score based on userChoice
     //      change element to remove dollar amount
     //      check if gameOver
@@ -171,7 +181,7 @@ const EventHandlers = {
             // find answer that matches id console log
             console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
             if (!singleJeopardyArray[categoryIndex][dValueIndex].answered) {
-                UI.openModal(singleJeopardyArray[categoryIndex][dValueIndex]);
+                UI.openAnswerModal(singleJeopardyArray[categoryIndex][dValueIndex]);
                 $(e.currentTarget).text(''); // remove dollar value from game board
             };
         } else {
@@ -180,24 +190,8 @@ const EventHandlers = {
 
     }, // end onClickDollarValue method
 
-    // onClickPlayerChoice: (e) => {
-    //     console.log('text box clicked');
-    //     playerPick = $(e.currentTarget).attr('id');
-    //     console.log(playerPick);
-    //     $divElement.remove();
-    //     if (playerPick === answerObject.solution) {
-    //         playerOne.score = playerOne.score + answerObject.dollar_value;
-    //     } else {
-    //         playerOne.score = playerOne.score - answerObject.dollar_value;
-    //     };
-    //     console.log('player score ' + playerOne.score);
-    //     $('#player-score').text(playerOne.score); // create a UI method to update score with $ formatting
-    //     console.log('check if game over');
-    //     Game.overCheck();
-    // }
-
     
-}
+} // end EventHandlers object
 
 const Game = {
 
@@ -243,6 +237,7 @@ const Game = {
         }
         if (gameOver) {
             // open gameOver modal
+            UI.openGameOverModal();
             console.log('game over');
             playerOne.gameOver = true;
         };
@@ -258,9 +253,7 @@ const playerOne = new Player();
 
 $( () => {
 
-
     $('.category-answer-box').on('click', EventHandlers.onClickDollarValue);
-
     
     
 });
