@@ -14,9 +14,10 @@ class Answer {
 
 class Player {
     // track player score
-    constructor (name, score=0) {
+    constructor (name, score=0, gameOver) {
         this.name = name;
         this.score = score;
+        this.gameOver = gameOver;
     }
     
 }
@@ -161,18 +162,22 @@ const EventHandlers = {
     onClickDollarValue: (e) => {
         console.log('box click triggers Event Handler method');
         console.log($(e.currentTarget).attr('id'));
-        // identify which answer is chosen, call function that returns answer object
-        let idNumber = parseInt($(e.currentTarget).attr('id')); // change id to a number
-        let categoryIndex = Math.floor(idNumber / 10);
-        let dValueIndex = idNumber % 10;
-        // console.log(categoryIndex, dValueIndex);
-        // find answer that matches id console log
-        console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
-        if (!singleJeopardyArray[categoryIndex][dValueIndex].answered) {
-            UI.openModal(singleJeopardyArray[categoryIndex][dValueIndex]);
-            $(e.currentTarget).text(''); // remove dollar value from game board
-        };
-        
+        if (!playerOne.gameOver) {
+            // identify which answer is chosen, call function that returns answer object
+            let idNumber = parseInt($(e.currentTarget).attr('id')); // change id to a number
+            let categoryIndex = Math.floor(idNumber / 10);
+            let dValueIndex = idNumber % 10;
+            // console.log(categoryIndex, dValueIndex);
+            // find answer that matches id console log
+            console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
+            if (!singleJeopardyArray[categoryIndex][dValueIndex].answered) {
+                UI.openModal(singleJeopardyArray[categoryIndex][dValueIndex]);
+                $(e.currentTarget).text(''); // remove dollar value from game board
+            };
+        } else {
+            console.log('game over, refresh browser to play again');
+        }
+
     }, // end onClickDollarValue method
 
     // onClickPlayerChoice: (e) => {
@@ -239,6 +244,7 @@ const Game = {
         if (gameOver) {
             // open gameOver modal
             console.log('game over');
+            playerOne.gameOver = true;
         };
         
     } // end overCheck method
@@ -252,6 +258,9 @@ const playerOne = new Player();
 
 $( () => {
 
+
     $('.category-answer-box').on('click', EventHandlers.onClickDollarValue);
+
+    
     
 });
