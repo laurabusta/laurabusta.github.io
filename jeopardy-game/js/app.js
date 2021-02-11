@@ -137,10 +137,12 @@ const UI = {
                 playerOne.score = playerOne.score - answerObject.dollar_value;
             };
             console.log('player score ' + playerOne.score);
+            $('#player-score').text(playerOne.score); // create a UI method to update score with $ formatting
+            console.log('check if game over');
         });
         ///////////////
-        
         answerObject.answered = true;
+        
     } // end openModal method
 
 
@@ -203,9 +205,12 @@ const singleJeopardyArray = Game.loadAnswersData(categoryArray, dollarValueArray
 console.log(singleJeopardyArray);
 const playerOne = new Player();
 
+
 $( () => {
 
     $('.category-answer-box').on('click', EventHandlers.onClickDollarValue);
+    
+    
 
 
 });
