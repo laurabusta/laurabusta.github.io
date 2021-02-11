@@ -73,14 +73,18 @@ h3 {
     width: 128px;
     height: 72px;
     background-color: #060CE9;
+    display: flex;
+    align-items: center;
+    justify-content:center;
 }
 
 .category-header {
     color: white;
     font-weight: bold;
     text-shadow: 2px 2px 1px black;
-    padding: 20px 10px 20px 10px;
-    /* letter-spacing: -1px; use this to play with bringing the letters closer togetherr */
+    /* padding: 20px 10px 20px 10px; */
+    letter-spacing: -1px;
+    font-size: 12pt;
 }
 
 .category-answer-box {

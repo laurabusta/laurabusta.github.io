@@ -27,11 +27,11 @@ class Player {
 // data to load into array of answer objects
 ////////////////////////////////////////////////
 
-const categoryArray = ['CATEGORY ONE', 'CATEGORY TWO', 'CATEGORY THREE', 'CATEGORY FOUR', 'CATEGORY FIVE', 'CATEGORY SIX'];
+const categoryArray = ['ENTERTAINMENT AWARDS', 'CAPITAL CITIES', 'FOOD STUFF', 'NUMBER GROUPS', 'IVY LEAGUE', 'CLASSIC MOVIE LINES'];
 const dollarValueArray = [100, 200, 300, 400, 500];
 const categoryAnswerArray = [
-    ['cat1:answer $100', 'cat1:answer $200', 'cat1:answer $300', 'cat1:answer $400', 'cat1:answer $500'],
-    ['cat2:answer $100', 'cat2:answer $200', 'cat2:answer $300', 'cat2:answer $400', 'cat2:answer $500'],
+    ['A 24-KARAT GOLD-PLATED TONE ARM IS PART OF THIS AWARD THAT WEIGHS 5 POUNDS', 'RICHARD PRYOR WAS THE FIRST RECIPIENT OF THIS PRIZE FOR AMERICAN HUMOR THAT\'S NAMED FOR A 19th CENTURY NOVELIST', 'FILM DIRECTOR OF "THE TEN COMMANDMENTS" IS THE FIRST RECIPIENT OF THE HONORARY GOLDEN GLOBE THAT IS NAMED FOR HIM', 'THE MOONMAN IS THE STATUETTE COVETED AT THIS AWARD SHOW', 'THIS TOP PRIZE OF THE CANNES FILM FESTIVAL PAYS TRIBUTE TO THE CITY\'S COAT OF ARMS'],
+    ['"CITY OF ANGELS, THE GREAT CITY, THE RESIDENCE OF THE EMERALD BUDDHA" IS JUST THE START OF THE OFFICIAL NAME OF THIS THAI CAPITAL', 'cat2:answer $200', 'cat2:answer $300', 'cat2:answer $400', 'cat2:answer $500'],
     ['cat3:answer $100', 'cat3:answer $200', 'cat3:answer $300', 'cat3:answer $400', 'cat3:answer $500'],
     ['cat4:answer $100', 'cat4:answer $200', 'cat4:answer $300', 'cat4:answer $400', 'cat4:answer $500'],
     ['cat5:answer $100', 'cat5:answer $200', 'cat5:answer $300', 'cat5:answer $400', 'cat5:answer $500'],
@@ -106,7 +106,7 @@ const UI = {
         console.log('box click triggers openAnswerModal method');
         $divElement = $('<div>').addClass('modal-box');
         $('#game-board').append($divElement);
-        h2String = 'For ' + answerObject.dollar_value + ' in ' + answerObject.category + '...';
+        h2String = 'For $' + answerObject.dollar_value + ' in ' + answerObject.category + '...';
         $divElement.append($('<h2>').text(h2String));
         //////////////
         const $divAnswerBox = $('<div>').addClass('modal-answer');
