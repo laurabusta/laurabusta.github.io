@@ -39,55 +39,55 @@ const categoryAnswerArray = [
 ];
 const categoryChoicesArray = [
     [
-        ['cat1:choice $100a', 'cat1:choice $100b', 'cat1:choice $100c', 'cat1:choice $100d'],
-        ['cat1:choice $200a', 'cat1:choice $200b', 'cat1:choice $200c', 'cat1:choice $200d'],
-        ['cat1:choice $300a', 'cat1:choice $300b', 'cat1:choice $300c', 'cat1:choice $300d'],
-        ['cat1:choice $400a', 'cat1:choice $400b', 'cat1:choice $400c', 'cat1:choice $400d'],
-        ['cat1:choice $500a', 'cat1:choice $500b', 'cat1:choice $500c', 'cat1:choice $500d']
+        ['what is an emmy?', 'what is a grammy?', 'what is a tony?', 'what is a golden globe?'],
+        ['who is herman melville?', 'who is charles dickens?', 'who is mark twain?', 'who is nathanial hawthorne?'],
+        ['who is orson welles?', 'who is alfred hitchcock?', 'who is francis ford coppola?', 'who is cecil b demille?'],
+        ['what is critics choice awards?', 'what is the kids choice awards?', 'what is MTV video music awards?', 'what is the young hollywood awards?'],
+        ['what is laureates de nobel?', 'what is the fleur de lis?', 'what is the laurel wreath?', 'what is the palm d\'or?']
     ],
     [
-        ['cat2:choice $100a', 'cat2:choice $100b', 'cat2:choice $100c', 'cat2:choice $100d'],
-        ['cat2:choice $200a', 'cat2:choice $200b', 'cat2:choice $200c', 'cat2:choice $200d'],
-        ['cat2:choice $300a', 'cat2:choice $300b', 'cat2:choice $300c', 'cat2:choice $300d'],
-        ['cat2:choice $400a', 'cat2:choice $400b', 'cat2:choice $400c', 'cat2:choice $400d'],
-        ['cat2:choice $500a', 'cat2:choice $500b', 'cat2:choice $500c', 'cat2:choice $500d']
+        ['what is kampala?', 'what is bangkok', 'what is kuala lumpur?', 'what is Pyongyang?'],
+        ['what is bucharest?', 'what is athens?', 'what is lebanon?', 'what is ankara?'],
+        ['what is Riyadh?', 'what is Muscat?', 'What is Baghdad?', 'what is Abu Dhabi?'],
+        ['What is London?', 'what is Ottawa?', 'what is prague', 'what is Warsaw?'],
+        ['what is kathmandu?', 'what is new dehli?', 'what is dhaka?', 'what is islamabad?']
     ],
     [
-        ['cat3:choice $100a', 'cat3:choice $100b', 'cat3:choice $100c', 'cat3:choice $100d'],
-        ['cat3:choice $200a', 'cat3:choice $200b', 'cat3:choice $200c', 'cat3:choice $200d'],
-        ['cat3:choice $300a', 'cat3:choice $300b', 'cat3:choice $300c', 'cat3:choice $300d'],
-        ['cat3:choice $400a', 'cat3:choice $400b', 'cat3:choice $400c', 'cat3:choice $400d'],
-        ['cat3:choice $500a', 'cat3:choice $500b', 'cat3:choice $500c', 'cat3:choice $500d']
+        ['what is corn flakes?', 'what is rice krispies?', 'what is froot loops?', 'what is frosted flakes?'],
+        ['what are nectarines?', 'what are avocados?', 'what are cataloupes?', 'what are bananas?'],
+        ['what is a spiral?', 'what is an tubular?', 'what is a ribbon?', 'what is a shell?'],
+        ['what is corn?', 'what is quinoa?', 'what is wheat?', 'what is rye?'],
+        ['what is mushroom?', 'what is chicken?', 'what is brocolli?', 'what is potato?']
     ],
     [
-        ['cat4:choice $100a', 'cat4:choice $100b', 'cat4:choice $100c', 'cat4:choice $100d'],
-        ['cat4:choice $200a', 'cat4:choice $200b', 'cat4:choice $200c', 'cat4:choice $200d'],
-        ['cat4:choice $300a', 'cat4:choice $300b', 'cat4:choice $300c', 'cat4:choice $300d'],
-        ['cat4:choice $400a', 'cat4:choice $400b', 'cat4:choice $400c', 'cat4:choice $400d'],
-        ['cat4:choice $500a', 'cat4:choice $500b', 'cat4:choice $500c', 'cat4:choice $500d']
+        ['who are 10,000 maniacs?', 'who are the B-52s?', 'who are Front 242?', 'who are sixpence none the richer?'],
+        ['who is U2?', 'Who is UB40?', 'who is 4 non blondes?', 'who is One Republic?'],
+        ['who is sum-41?', 'who is eve6?', 'who is 311?', 'who is Blink-182?'],
+        ['who is Matchbox 20?', 'who is L7?', 'who is nine inch nails?', 'Who is the Old 97s?'],
+        ['who is Ben Folds Five?', 'who is third eye blind?', 'who is Maroon 5?', 'who is thee six mafia?']
     ],
     [
-        ['cat5:choice $100a', 'cat5:choice $100b', 'cat5:choice $100c', 'cat5:choice $100d'],
-        ['cat5:choice $200a', 'cat5:choice $200b', 'cat5:choice $200c', 'cat5:choice $200d'],
-        ['cat5:choice $300a', 'cat5:choice $300b', 'cat5:choice $300c', 'cat5:choice $300d'],
-        ['cat5:choice $400a', 'cat5:choice $400b', 'cat5:choice $400c', 'cat5:choice $400d'],
-        ['cat5:choice $500a', 'cat5:choice $500b', 'cat5:choice $500c', 'cat5:choice $500d']
+        ['what is providence?', 'what is brown?', 'what is dartmouth?', 'what is northwestern?'],
+        ['what is wesleyan?', 'what is Upenn?', 'what is princeton?', 'what is georgetown?'],
+        ['what is yale?', 'what is NYU?', 'what is columbia?', 'what is MIT?'],
+        ['what is yale?', 'what is harvard?', 'what is princeton?', 'what is duke?'],
+        ['what is cornell?', 'what is dartmouth?', 'what is yale?', 'what is stanford?']
     ],
     [
-        ['cat6:choice $100a', 'cat6:choice $100b', 'cat6:choice $100c', 'cat6:choice $100d'],
-        ['cat6:choice $200a', 'cat6:choice $200b', 'cat6:choice $200c', 'cat6:choice $200d'],
-        ['cat6:choice $300a', 'cat6:choice $300b', 'cat6:choice $300c', 'cat6:choice $300d'],
-        ['cat6:choice $400a', 'cat6:choice $400b', 'cat6:choice $400c', 'cat6:choice $400d'],
-        ['cat6:choice $500a', 'cat6:choice $500b', 'cat6:choice $500c', 'cat6:choice $500d']
+        ['what is my cousin vinny?', 'what is taxi driver?', 'what is goodfellas?', 'what is the godfather?'],
+        ['what is ghost?', 'what is inception?', 'what is the sixth sense?', 'what is poltergeist?'],
+        ['what is manhattan?', 'what is annie hall?', 'what is purple rose of cairo?', 'what is hannah and her sisters?'],
+        ['what is the pelican brief?', 'what is the client?', 'what is the firm?', 'what is a few good men?'],
+        ['what is ghostbusters?', 'what is back to the future?', 'what is the terminator?', 'what is war games?']
     ]
 ];
 const solutionKey = [
-    ['A', 'B', 'C', 'D', 'A'],
-    ['A', 'B', 'C', 'D', 'A'],
-    ['A', 'B', 'C', 'D', 'A'],
-    ['A', 'B', 'C', 'D', 'A'],
-    ['A', 'B', 'C', 'D', 'A'],
-    ['A', 'B', 'C', 'D', 'A']
+    ['B', 'C', 'D', 'C', 'D'],
+    ['B', 'D', 'A', 'C', 'D'],
+    ['B', 'D', 'A', 'A', 'C'],
+    ['B', 'A', 'D', 'C', 'C'],
+    ['B', 'C', 'C', 'B', 'A'],
+    ['B', 'C', 'B', 'D', 'A']
 ];
 
 
@@ -134,14 +134,14 @@ const UI = {
             playerPick = $(choiceEvent.currentTarget).attr('id');
             console.log(playerPick);
             $divElement.remove();
-            if (playerPick === answerObject.solution) {
-                playerOne.score = playerOne.score + answerObject.dollar_value;
-            } else {
+            if (playerPick === answerObject.solution) { // correct answer
+                playerOne.score = playerOne.score + answerObject.dollar_value; 
+            } else { // incorrect answer
                 playerOne.score = playerOne.score - answerObject.dollar_value;
             };
             console.log('player score ' + playerOne.score);
             $('#player-score').text(playerOne.score); // create a UI method to update score with $ formatting
-            console.log('check if game over');
+            // console.log('check if game over');
             Game.overCheck();
         });
         ///////////////
