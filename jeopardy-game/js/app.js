@@ -186,19 +186,27 @@ const UI = {
     }, // end openSolutionModal method
 
     openGameOverModal: () => {
-        
+        // open a game over modal that shows the player if they won or loss, their score and tells them to refresh the browser to play again
+
+        // create modal <div>
         $divModalBox = $('<div>').addClass('modal-box');
         $('#game-board').append($divModalBox);
+
+        // add game over header to modal
         $divModalBox.append($('<h2>').text('GAME OVER!'));
-        //////////////
+
+        // add box to display end game status
         const $divAnswerBox = $('<div>').addClass('modal-answer');
         $divModalBox.append($divAnswerBox);
-        if (playerOne.won) {
+
+        if (playerOne.won) { // if player won then add this text
             $divAnswerBox.append($('<div>').addClass('modal-answer-text').text('YOU WON!'));
-        } else {
+        } else { // if player lost, then add this text
             $divAnswerBox.append($('<div>').addClass('modal-answer-text').text('YOU LOST!'));
         };
-        $divAnswerBox.append($('<div>').addClass('modal-answer-text').text('SCORE: ' + playerOne.score));
+        $divAnswerBox.append($('<div>').addClass('modal-answer-text').text('SCORE: ' + playerOne.score)); // show player score
+
+        // add text to modal to tell player to refresh browser to play game
         $divModalBox.append($('<h2>').text('REFRESH BROWSER TO PLAY AGAIN!'));
 
     } // end openGameOverModal method
@@ -257,8 +265,7 @@ const EventHandlers = {
 
         $('.modal-box').remove(); // remove modal from DOM
         Game.modalBoxOpen = false;
-
-        Game.overCheck();
+        Game.overCheck(); // check if game over
 
     } // end onClickCloseButton method
 
@@ -310,11 +317,10 @@ const Game = {
             playerOne.won = false;
         }
 
-        if (gameOver) {
-            // open gameOver modal
+        if (gameOver) { // if game is over then open modal to show end game stats
             UI.openGameOverModal();
             playerOne.gameOver = true;
-        };
+        }; // else game continues
         
     } // end overCheck method
 
@@ -322,11 +328,12 @@ const Game = {
 
 
 const singleJeopardyArray = Game.loadAnswersData(categoryArray, dollarValueArray, categoryAnswerArray, categoryChoicesArray, solutionKey, solutionIndexArray);
-console.log(singleJeopardyArray);
-const playerOne = new Player();
+console.log(singleJeopardyArray); // load game data into a 2d array of Answer objects
+const playerOne = new Player(); // initialize an object of class Player to track player progress in game
 
 $( () => {
 
+    // start state, listen for player clicking on a dollar value
     $('.category-answer-box').on('click', EventHandlers.onClickDollarValue);
     
     
