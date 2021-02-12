@@ -32,6 +32,7 @@ I intend to use this as an educational tool with other projects I am currently w
 ## Future Development
 * may change the variable naming convention because flipping "question" and "answer" to match jeopardy jargon can be confusing...
 * add start modal to get player name
+* game save option; would need a reset button
 * add method to load category headers into UI from data array
 * create a top level modal method for consistent styling of all methods
 * make responsive styling for mobile use (iPhone/tablet)
@@ -40,7 +41,6 @@ I intend to use this as an educational tool with other projects I am currently w
 * create end game form to send results to email address or take snapshot of results
 * create functionality for admin to upload custom themes and questions
 * add multi-player option; head-to-head gameplay
-* game save option
 
 ## Revision Tracker
 * 2012.02.12 - prototype for proof of concept
