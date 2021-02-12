@@ -1,18 +1,23 @@
-console.log("hello world");
+// Project 1 - Jeopardy Game - by Laura Bustamante
 
+///////////////////////////////////////////////
+// class declarations
+///////////////////////////////////////////////
 
+// every dollar value on the game board is assoicated to a unique Answer object
 class Answer {
     constructor (category, dollar_value, answer, choicesArray, solution, solutionIndex, answered = false) {
-        this.category = category;
+        this.category = category; // one of the 6 categories in the game
         this.dollar_value = dollar_value; // integer used in score calculation
-        this.answer = answer;
+        this.answer = answer; // in jeopardy, each dollar value shows an "answer". player selects a quesion from the choices array that matches the answer.
         this.choicesArray = choicesArray;
-        this.solution = solution;
-        this.solutionIndex = solutionIndex;
-        this.answered = answered;
+        this.solution = solution; // these are used for unique id to access in DOM
+        this.solutionIndex = solutionIndex;  // created an index to point to answer solution in choices Array. 
+        this.answered = answered; // boolean to indicate if object was already answered. used in game over check.
     }
 }
 
+// created class for player to keep track of each player's properties throughout the game. intended for future multiplayer option.
 class Player {
     // track player score
     constructor (name, score=0, gameOver=false, won=true, activeAnswer) {
@@ -20,7 +25,7 @@ class Player {
         this.score = score;
         this.gameOver = gameOver;
         this.won = won;
-        this.activeAnswer = activeAnswer;
+        this.activeAnswer = activeAnswer; // Answer object of the current dollar value that the player is solving.
     }
     
 }
@@ -91,6 +96,9 @@ const solutionKey = [
     ['B', 'C', 'C', 'B', 'A'],
     ['B', 'C', 'B', 'D', 'A']
 ];
+
+// translated the solution key into an array of integers as a temporary solution. would avoid data entry errors by translating solution key ASCII code into the corresponding integer to access it from the data array.
+
 const solutionIndexArray = [
     [1,2,3,2,3],
     [1,3,0,2,3],
@@ -108,63 +116,77 @@ const solutionIndexArray = [
 const UI = {
     
     openAnswerModal: (answerObject) => {
-        console.log('box click triggers openAnswerModal method');
+        // open a modal that shows the player the dollar value answer they selected along with solution choices, player clicks on their choice of four solutions
+
+        // set Game.modalBoxOpen to true to prevent player from clicking other dollar values before closing modal
+        Game.modalBoxOpen = true;
+
         // build the Answer Modal
         $divElement = $('<div>').addClass('modal-box');
         $('#game-board').append($divElement);
+
+        // add an h2 header that indicates the dollar value and category of the Answer the player is solving
         h2String = 'For $' + answerObject.dollar_value + ' in ' + answerObject.category + '...';
         $divElement.append($('<h2>').text(h2String));
+
         // add <div> of Answer box for dollar value that was selected
         const $divAnswerBox = $('<div>').addClass('modal-answer');
         $divElement.append($divAnswerBox);
         $divAnswerBox.append($('<div>').addClass('modal-answer-text').text(answerObject.answer));
+
         // add <div> of Answer choices to modal
         const $divChoices = $('<div>').addClass('modal-choices');
         let num = 0;
         const choiceId = ['A', 'B', 'C', 'D'];
         for (let answerChoice of answerObject.choicesArray) {
-            // aNumChar = num.toString();
-            // let idChoice = 'ch' + aNumChar;
             const $divChoicesTextBox = $('<div>').addClass('modal-choices-text-box').attr('id', choiceId[num]);
             $divChoicesTextBox.append($('<div>').addClass('modal-choices-text').text(answerChoice));
             $divChoices.append($divChoicesTextBox);
             num++;
         };
         $divElement.append($divChoices);
-        answerObject.answered = true;
-        // event listener - when player selects one of the choices, modal box is closed, score is updated on UI and modal opened with correct solution 
+        answerObject.answered = true; // indicate that this object was already answered so it can't be selected again by the player
+
+        // onClickPlayerChoice event listener - when player selects one of the choices, modal box is closed, score is updated on UI and modal opened with correct solution 
         $('.modal-choices-text-box').on('click', EventHandlers.onClickPlayerChoice);
             
     }, // end openAnswerModal method
 
     openSolutionModal: (correct) => {
-        // open a modal that shows the answer solution
-        // have a close button to move on
-        console.log('Solution Modal');
+        // open a modal that shows the player if they got the solution correct, displays the correct solution and has button to close the modal when player is ready to move on
+        
+        // set Game.modalBoxOpen to true to prevent player from clicking other dollar values before closing modal
+        Game.modalBoxOpen = true;
+
+        // create modal <div>
         $divModalBox = $('<div>').addClass('modal-box');
         $('#game-board').append($divModalBox);
-        if (correct){
+
+        if (correct){ // if player got it correct header says 'correct'
             $divModalBox.append($('<h2>').text('CORRECT!').css('color', 'green'));
-        } else {
+        } else { // if player got it wrong header says 'wrong'
             $divModalBox.append($('<h2>').text('WRONG!').css('color', 'red'));
         };
         
-        // add <div> of Answer box for dollar value that was selected
+        // add <div> of Answer box for dollar value that player was solving
         const $divAnswerBox = $('<div>').addClass('modal-answer');
         $divModalBox.append($divAnswerBox);
         $divAnswerBox.append($('<div>').addClass('modal-answer-text').text(playerOne.activeAnswer.answer));
+
         // add <div> of correct solution
         $divModalBox.append($('<h2>').text('SOLUTION IS:'));
         const $divSolutionBox = $('<div>').addClass('modal-solution-box');
         $divSolutionBox.append($('<div>').addClass('modal-solution-text').text(playerOne.activeAnswer.choicesArray[playerOne.activeAnswer.solutionIndex]));
         $divModalBox.append($divSolutionBox);
+
         // when player clicks the close button, check if game over and close solution modal
         $divModalBox.append($('<button>').addClass('button').text('close'));
         $('.button').on('click', EventHandlers.onClickCloseButton);
-    },
+
+    }, // end openSolutionModal method
 
     openGameOverModal: () => {
-        console.log('openGameOverModal');
+        
         $divModalBox = $('<div>').addClass('modal-box');
         $('#game-board').append($divModalBox);
         $divModalBox.append($('<h2>').text('GAME OVER!'));
@@ -184,71 +206,71 @@ const UI = {
 } // end UI object
 
 const EventHandlers = {
-    // click on answer onClickDollarValue
-    //      match element with answer object
-    //      UI.openAnswerModal (pass Answer object) -> return userChoice
-    //      update Player score based on userChoice
-    //      change element to remove dollar amount
-    //      check if gameOver
 
     onClickDollarValue: (e) => {
-        console.log('box click triggers Event Handler method');
-        console.log($(e.currentTarget).attr('id'));
-        if (!playerOne.gameOver) {
-            // identify which answer is chosen, call function that returns answer object
-            let idNumber = parseInt($(e.currentTarget).attr('id')); // change id to a number
+        // identify which dollar value answer is chosen, call function that opens the Answer modal if it hasn't already been answered
+
+        if (!playerOne.gameOver && !Game.modalBoxOpen) { // can only click on dollar value if game isn't over and a modal box isn't open
+            let idNumber = parseInt($(e.currentTarget).attr('id')); // get unique id of selected dollar value box, change id to a number
+            // first digit of unique id is the category index in 2d data array
+            // second digit of unique id is the dollar value index in 2d data array
             let categoryIndex = Math.floor(idNumber / 10);
             let dValueIndex = idNumber % 10;
-            // console.log(categoryIndex, dValueIndex);
-            // find answer that matches id console log
-            console.log(singleJeopardyArray[categoryIndex][dValueIndex]);
+            // if the dollar value that was clicked hasn't been answered, then open Answer modal
             if (!singleJeopardyArray[categoryIndex][dValueIndex].answered) {
                 UI.openAnswerModal(singleJeopardyArray[categoryIndex][dValueIndex]);
                 $(e.currentTarget).text(''); // remove dollar value from game board
-                playerOne.activeAnswer = singleJeopardyArray[categoryIndex][dValueIndex];
+                playerOne.activeAnswer = singleJeopardyArray[categoryIndex][dValueIndex]; // gives player object the Answer object that they are currently answered. for use in other methods.
             };
         } else {
-            console.log('game over, refresh browser to play again');
+            console.log('can\'t click on dollar value if game over or modal open');
+            // prevents player from continuing to play after game over
         }
 
     }, // end onClickDollarValue method
 
     onClickPlayerChoice: (e) => {
-        // when player selects one of the choices in answer modal, modal box is closed, score is updated on UI and modal opened with correct solution 
-        console.log('player made a choice');
-        let playerPicked = $(e.currentTarget).attr('id');
-        answerObject = playerOne.activeAnswer; // this is the Answer object that player selected
-        $('.modal-box').remove(); // remove modal from DOM
-        let correct = false;
-        if (playerPicked === answerObject.solution) { // correct answer
+        // when player selects one of the choices in answer modal, answer modal box is closed, score is updated on UI and modal opened with correct solution 
+
+        let playerPicked = $(e.currentTarget).attr('id'); // unique id of solution selected by player
+        answerObject = playerOne.activeAnswer; // this is the object of the Answer the player is solving; assigned in onClickDollarValue
+        
+        // update the player's score in the Player object
+        let correct = false; // variable passed to solution modal
+        if (playerPicked === answerObject.solution) { // if correct answer
             playerOne.score = playerOne.score + answerObject.dollar_value; 
-            correct = true;
-        } else { // incorrect answer
+            correct = true; 
+        } else { // if incorrect answer
             playerOne.score = playerOne.score - answerObject.dollar_value;
         };
-        console.log('player score ' + playerOne.score);
-        $('#player-score').text(playerOne.score); // create a UI method to update score with $ formatting
-        UI.openSolutionModal(correct);
-        // console.log('check if game over');
-        // Game.overCheck();
-        // open solution modal UI.openSolutionModal pass if answer correct
-    },
+        $('#player-score').text(playerOne.score); // player score updated on UI; future update - create a UI method to update score with $ formatting
+
+        $('.modal-box').remove(); // remove modal from DOM
+        Game.modalBoxOpen = false;
+
+        UI.openSolutionModal(correct); // open solution modal, pass variable that tells method if they player got the correct answer
+
+    }, // end onClickPlayerChoice method
 
     onClickCloseButton: (e) => {
-        // on solution close button do the Game.overCheck
-        console.log('close button clicked');
-        $('.modal-box').remove();
+        // on solution modal, close button does the Game.overCheck and removes modal from DOM
+
+        $('.modal-box').remove(); // remove modal from DOM
+        Game.modalBoxOpen = false;
+
         Game.overCheck();
-    }
+
+    } // end onClickCloseButton method
 
     
 } // end EventHandlers object
 
 const Game = {
 
-    //  loadAnswersData: receives data arrays to return a 2-d array of Answer objects
-    //          designed for future expansion to load a second double jeopardy round
+    modalBoxOpen: false, // Game object property that indicates if a modal box is open
+    
     loadAnswersData: (catArray, dValArray, answersArray, choicesArray, solArray, solIndexArray) => {
+    //  loadAnswersData: receives data arrays to return a 2-d array of Answer objects; designed for future expansion to load a second double jeopardy round
 
         const masterAnswersArray = []; // declare return variable of 2-d array of Answer objects
         let tempCategoryAnswersArray = []; // temp array for inner for-loop that is pushed on master array
@@ -267,30 +289,30 @@ const Game = {
     }, // end loadAnswersData method
 
     overCheck: () => {
-        // if all questions have been answered, game is over and show game over modal
+        // if all questions have been answered or player score cannot reach winning condition, game is over and show game over modal
+
         let gameOver = true;
         let unansweredDvSum = 0;
-        // check all answers to see if any are not answered and sum of points left on board
+        // check all answers to see if any of the objects are not answered and sum of points left on board
         for (let catIndex=0; catIndex<6; catIndex++) {
             for (let dvIndex=0; dvIndex<5; dvIndex++) {
                 if (singleJeopardyArray[catIndex][dvIndex].answered === false) {
-                    gameOver = false;
-                    unansweredDvSum = unansweredDvSum + singleJeopardyArray[catIndex][dvIndex].dollar_value;
+                    gameOver = false; // object is unanswered game is not over
+                    unansweredDvSum = unansweredDvSum + singleJeopardyArray[catIndex][dvIndex].dollar_value; // sum all the unanswered dollar values to check if player has ability to reach winning condition
                 };
             }; // end inner for-loop
         }; // end outer for-loop
-        console.log('Player score: ' + playerOne.score);
-        console.log('Number of points left on game board: ' + unansweredDvSum);
+        
         // if player cannot get enough points to win game, then game over
         if (playerOne.score + unansweredDvSum < 0) {
             console.log('not enough points left on board for player to win');
             gameOver = true;
             playerOne.won = false;
         }
+
         if (gameOver) {
             // open gameOver modal
             UI.openGameOverModal();
-            console.log('game over');
             playerOne.gameOver = true;
         };
         
