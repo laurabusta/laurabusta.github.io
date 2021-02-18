@@ -4,7 +4,7 @@ Link to deployed app --> [Jeopardy by LB](https://laurabusta.github.io/jeopardy-
 
 ## Overview
 
-[Game Screenshot](https://i.imgur.com/7c1s2EO.png)
+![Game Screenshot](https://i.imgur.com/7c1s2EO.png)
 
 For Project #1, in General Assembly's Software Engineering Immersive Bootcamp Program, I created a Jeopardy game as an exercise in styling HTML with CSS, using flexbox properties and manipulating the DOM with Javascript and JQuery. I specifically chose this project option to gain more experience in these areas that I did not have previous experience with. 
 
